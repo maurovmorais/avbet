@@ -20,9 +20,9 @@ module.exports = {
   async show(req, res) {
     let { id } = req.params;
     try {
-      const apostas = await knex(tabela).select().where('id', id);
+      const aposta = await knex(tabela).select().where('id', id);
 
-      return res.json({ status: 'sucesso', apostas });
+      return res.json({ status: 'sucesso', aposta });
 
     } catch (e) {
       return res.json({ status: 'erro', message: e.message })

@@ -11,14 +11,14 @@ const app = express();
 
 const index = require('./routes/index');
 const usuarios = require('./routes/usuarios');
-const usuarios = require('./routes/jogadores');
-const usuarios = require('./routes/jogos');
-const usuarios = require('./routes/time');
-const usuarios = require('./routes/apostas');
-const usuarios = require('./routes/regras_time');
-const usuarios = require('./routes/regras_jogadores');
-const usuarios = require('./routes/pontuacao_usuarios');
-const usuarios = require('./routes/posicao');
+const jogadores = require('./routes/jogadores');
+const jogos = require('./routes/jogos');
+const time = require('./routes/time');
+const apostas = require('./routes/apostas');
+const regras_time = require('./routes/regras_time');
+const regras_jogadores = require('./routes/regras_jogadores');
+const pontuacao_usuarios = require('./routes/pontuacao_usuarios');
+const posicao = require('./routes/posicao');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -36,11 +36,11 @@ app.use('/usuarios', usuarios);
 app.use('/jogadores', jogadores);
 app.use('/jogos', jogos);
 app.use('/time', time);
-app.use('/time', apostas);
-app.use('/time', regras_time);
-app.use('/time', regras_jogadores);
-app.use('/time', pontuacao_usuarios);
-app.use('/time', posicao);
+app.use('/apostas', apostas);
+app.use('/regras_time', regras_time);
+app.use('/regras_jogadores', regras_jogadores);
+app.use('/pontucao_usuarios', pontuacao_usuarios);
+app.use('/posicao', posicao);
 
 app.listen(porta, ()=>{
   console.log('api rodando na porta ', porta)
