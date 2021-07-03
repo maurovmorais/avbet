@@ -11,6 +11,8 @@ const app = express();
 
 const index = require('./routes/index');
 const usuarios = require('./routes/usuarios');
+const usuarios = require('./routes/jogadores');
+const usuarios = require('./routes/jogos');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
