@@ -69,7 +69,7 @@ module.exports = {
         vencJogo,
         placarA,
         placarB,
-        atualizado: new Date.now()
+        atualizado: knex.fn.now()
       }).where('id', id);
 
       return res.json({status: 'sucesso', message: 'Jogo atualizado com sucesso.'})

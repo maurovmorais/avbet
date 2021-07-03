@@ -69,7 +69,7 @@ module.exports = {
         senha,
         perfil,
         status,
-        atualizado: new Date.now()
+        atualizado: knex.fn.now()
       }).where('id', id);
 
       return res.json({status: 'sucesso', message: 'Usuario atualizado com sucesso.'})

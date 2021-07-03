@@ -67,7 +67,7 @@ module.exports = {
         empate,
         vitoria,
         derrota,
-        atualizado: new Date.now()
+        atualizado: knex.fn.now()
       }).where('id', id);
 
       return res.json({status: 'sucesso', message: 'Regras do time atualizadas com sucesso.'})

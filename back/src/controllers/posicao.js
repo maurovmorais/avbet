@@ -61,7 +61,7 @@ module.exports = {
 
       await knex(tabela).update({
         nomePosicao,
-        atualizado: new Date.now()
+        atualizado: knex.fn.now()
       }).where('id', id);
 
       return res.json({status: 'sucesso', message: 'Posição atualizado com sucesso.'})

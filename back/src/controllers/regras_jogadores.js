@@ -125,7 +125,7 @@ module.exports = {
         cardAmarelo,
         cardVermelho,
         rapadura,
-        atualizado: new Date.now()
+        atualizado: knex.fn.now()
       }).where('id', id);
 
       return res.json({ status: 'sucesso', message: 'Regra atualizada com sucesso.' })

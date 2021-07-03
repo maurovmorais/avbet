@@ -67,7 +67,7 @@ module.exports = {
         acumulado,
         aposta,
         pontuacao,
-        atualizado: new Date.now()
+        atualizado: knex.fn.now()
       }).where('id', id);
 
       return res.json({status: 'sucesso', message: 'Pontuação atualizada com sucesso.'})

@@ -137,7 +137,7 @@ module.exports = {
         atac4,
         atac5,
         pontTime,
-        atualizado: new Date.now()
+        atualizado: knex.fn.now()
       }).where('id', id);
 
       return res.json({ status: 'sucesso', message: 'Time atualizado com sucesso.' })

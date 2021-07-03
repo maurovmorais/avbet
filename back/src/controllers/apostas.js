@@ -129,7 +129,7 @@ module.exports = {
         placarAfinal,
         placarBfinal,
         melhorGoleiro,
-        atualizado: new Date.now()
+        atualizado: knex.fn.now()
       }).where('id', id);
 
       return res.json({ status: 'sucesso', message: 'Aposta atualizada com sucesso.' })
