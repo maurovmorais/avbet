@@ -1,42 +1,98 @@
 'use strict';
-const path = require('path');
+const knex = require('../database/connection');
+const tabela = 'usuarios';
 
-module.exports ={
-  async index(req,res){
+module.exports = {
+
+  //busca todos os usuarios
+  async index(req, res) {
     try {
-      const index = path.resolve(__dirname, '..', 'public', 'index.html');
+      const usuarios = await knex(tabela).select();
 
-      return res.json("Estou no arquivo usuarios")
-    }catch(e) {
-      return res.status(500).json({message: e.message}) 
+      return res.json({ status: 'sucesso', usuarios });
+
+    } catch (e) {
+      return res.json({ status: 'erro', message: e.message })
     }
   },
 
-  async create(req,res){
-    let{data} = req.body;
+  //busca um usuario unico
+  async show(req, res) {
+    let { id } = req.params;
     try {
-      return res.json('ok')
-    }catch(e) {
-      return res.status(500).json({message: e.message}) 
+      const usuario = await knex(tabela).select().where('id', id);
+
+      return res.json({ status: 'sucesso', usuario });
+
+    } catch (e) {
+      return res.json({ status: 'erro', message: e.message })
     }
   },
 
-  async update(req,res){
-    let{id} = req.params;
-    let{data} = req.body;
+
+  //cria um novo usuario
+  async create(req, res) {
+
+    let { nomeUser, email, senha, token, perfil } = req.body;
+
     try {
-      return res.json('ok')
-    }catch(e) {
-      return res.status(500).json({message: e.message}) 
+      await knex(tabela).insert({
+        nomeUser,
+        email,
+        senha,
+        token,
+        perfil
+      })
+
+      return res.json({status: 'sucesso', message: 'Usuario criado com sucesso'})
+    } catch (e) {
+      return res.json({status: 'erro', message: e.message })
     }
   },
 
-  async delete(req,res){
-    let{id} = req.params;
+
+  //atualiza as informacoes do usuario
+  async update(req, res) {
+    let { id } = req.params;
+    let { nomeUser, email, senha, perfil, status } = req.body;
     try {
+
+      const usuario = await knex(tabela).select('nome').where('id', id).first();
+
+      if(!usuario){
+        return res.json({status: 'erro', message: 'Usuário não existe.'})
+      }
+
+      await knex(tabela).update({
+        nomeUser,
+        email,
+        senha,
+        perfil,
+        status,
+        atualizado: new Date.now()
+      }).where('id', id);
+
+      return res.json({status: 'sucesso', message: 'Usuario atualizado com sucesso.'})
+
+    } catch (e) {
+      return res.json({status: 'erro', message: e.message })
+    }
+  },
+
+
+  //deleta o usuario
+  async delete(req, res) {
+    let { id } = req.params;
+    try {
+      const usuario = await knex(tabela).select('nome').where('id', id).first();
+
+      if(!usuario){
+        return res.json({status: 'erro', message: 'Usuário não existe.'})
+      }
+      await knex(tabela).delete().where('id', id);
       return res.json('ok')
-    }catch(e) {
-      return res.status(500).json({message: e.message}) 
+    } catch (e) {
+      return res.status(500).json({ message: e.message })
     }
   },
 
