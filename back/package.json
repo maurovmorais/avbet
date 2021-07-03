@@ -20,7 +20,6 @@
     "test": "nodemon src/index.js",
     "start": "node src/index.js"
   },
-  
   "author": "Bruno Marconcini Pupp",
   "license": "ISC"
 }
