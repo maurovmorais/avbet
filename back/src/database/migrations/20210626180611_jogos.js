@@ -5,8 +5,8 @@ exports.up = function(knex) {
         table.datetime('dataJogo');
         table.string('vencIntervalo');
         table.string('vencJogo');
-        table.integer('placarA');
-        table.integer('placarB');
+        table.int('placarA');
+        table.int('placarB');
         table.timestamp('criado').defaultTo(knex.fn.now());
         table.timestamp('atualizado');    
       })  

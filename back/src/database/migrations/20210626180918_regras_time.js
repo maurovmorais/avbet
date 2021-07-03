@@ -1,9 +1,11 @@
 
 exports.up = function(knex) {
-    return knex.schema.createTable('usuarios', function(table){
+    return knex.schema.createTable('regras_time', function(table){
         table.increments('id').primary();
-        table.string('regra');
-        table.string('regra');
+        table.int('golSofrido');
+        table.int('empate');
+        table.int('vitoria');
+        table.int('derrota');
         table.timestamp('criado').defaultTo(knex.fn.now());
         table.timestamp('atualizado');    
       })  
